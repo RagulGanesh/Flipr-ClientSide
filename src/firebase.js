@@ -1,17 +1,17 @@
 // Import the functions you need from the SDKs you need
+import { getStorage } from "firebase/storage";
 import { initializeApp } from "firebase/app";
-import { getStorage } from "firebase/storage"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBmTqKtT8aqHg1VXwIdZbE2oV2tKK9CO6E",
-  authDomain: "flipr-5e4d9.firebaseapp.com",
-  projectId: "flipr-5e4d9",
-  storageBucket: "flipr-5e4d9.appspot.com",
-  messagingSenderId: "988148269340",
-  appId: "1:988148269340:web:61fe4bac9b81a26b8abad9"
+  apiKey: "AIzaSyDwLiu1maihcTzDhkuYoVbKdGsynSGK0d8",
+  authDomain: "flipr-830bb.firebaseapp.com",
+  projectId: "flipr-830bb",
+  storageBucket: "flipr-830bb.appspot.com",
+  messagingSenderId: "527421590586",
+  appId: "1:527421590586:web:b51306c80e2675a32cb903"
 };
 
 // Initialize Firebase

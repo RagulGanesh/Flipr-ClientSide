@@ -9,7 +9,18 @@ export const Cards = (props) => {
   const handleDelete=async(id)=>{
     let newMedia = props.medias.filter((med) => { return med._id !== id })
     let delMedia=props.medias.filter((med)=>{return med._id === id})
-    let storageRef = ref(storage,delMedia.videos)
+    // console.log(delMedia.videos)
+    let text = delMedia[0].videos
+    let result = parseInt(text.lastIndexOf('o/')+2);
+    let result1 ;
+    if(parseInt(text.lastIndexOf('.mp4')) == -1)
+      result1=parseInt(text.lastIndexOf('.mp3')+4);
+    else
+      result1=parseInt(text.lastIndexOf('.mp4')+4);
+
+    let ans=text.substr(result,result1-result)
+
+    let storageRef = ref(storage,ans)
     console.log(storageRef)
     deleteObject(storageRef).then(() => {
       // File deleted successfully
@@ -28,11 +39,6 @@ export const Cards = (props) => {
       },
       // body: JSON.stringify(data),
     });
-
-    
-
-  
-    
   }
   return (
     <div className="col-md-4">
