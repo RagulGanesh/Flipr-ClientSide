@@ -50,7 +50,7 @@ export const Admin = () => {
   return (
     <>    
     {isLoading && <Spinner/>}
-    {!isLoading && <> <UploadForm getAllMedias={checkAdmin} setIsLoading={setIsLoading}/> <UploadsList isAdmin={isAdmin} medias={medias}/></>}
+    {!isLoading && <> <UploadForm getAllMedias={checkAdmin} setIsLoading={setIsLoading}/> <UploadsList isAdmin={isAdmin} medias={medias} setMedias={setMedias}/></>}
     </>
   );
 };

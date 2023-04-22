@@ -108,63 +108,63 @@ const UploadForm = ({ getAllMedias, setIsLoading }) => {
     <div className="container my-4">
       <form onSubmit={handleSubmit}>
 
-        <div class="mb-3">
-          <label for="name" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="name" className="form-label">
             Name
           </label>
           <input
             onChange={(e) => setName(e.target.value)}
             type="text"
             name="name"
-            class="form-control"
+            className="form-control"
             id="name"
             aria-describedby="emailHelp"
           />
         </div>
 
-        <div class="mb-3">
-          <label for="name" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="name" className="form-label">
             Description
           </label>
           <textarea name="description" id="description" className="form-control"onChange={(e) => setDescription(e.target.value)} cols="30" rows="5"></textarea>
         </div>
 
-        <div class="mb-3">
-          <label for="name" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="name" className="form-label">
             Category
           </label>
           <input
             onChange={(e) => setCategory(e.target.value)}
             type="text"
             name="category"
-            class="form-control"
+            className="form-control"
             id="category"
             aria-describedby="emailHelp"
           />
         </div>
 
-        <div class="mb-3">
-          <label for="name" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="name" className="form-label">
             Speaker
           </label>
           <input
             onChange={(e) => setSpeaker(e.target.value)}
             type="text"
             name="speaker"
-            class="form-control"
+            className="form-control"
             id="speaker"
             aria-describedby="emailHelp"
           />
         </div>
 
-        <div class="mb-3">
-          <label for="videos" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="videos" className="form-label">
             Upload Video/Audio
           </label>
           <input
             type="file"
             name="videos"
-            class="form-control"
+            className="form-control"
             id="videos"
             multiple
             accept=".mp4, .mkv,.mp3"
@@ -173,7 +173,7 @@ const UploadForm = ({ getAllMedias, setIsLoading }) => {
             }}
           />
         </div>
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" className="btn btn-primary">
           Submit
         </button>
       </form>
