@@ -3,6 +3,7 @@ import axios from "axios";
 import { BACKEND_URI } from "../config/constants";
 import { storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import FileBase from 'react-file-base64';
 
 const UploadForm = ({ getAllMedias, setIsLoading }) => {
   const [name, setName] = useState("");
@@ -10,7 +11,7 @@ const UploadForm = ({ getAllMedias, setIsLoading }) => {
   const [category, setCategory] = useState("");
   const [speaker, setSpeaker] = useState("");
   const [videos, setVideos] = useState(null);
-
+  const [img, setImg] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,8 +29,7 @@ const UploadForm = ({ getAllMedias, setIsLoading }) => {
       "state_changed",
       (snapshot) => {
         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log("Upload is " + progress + "% done");
         switch (snapshot.state) {
           case "paused":
@@ -68,6 +68,7 @@ const UploadForm = ({ getAllMedias, setIsLoading }) => {
                   description,
                   category,
                   speaker,
+                  thumbnail : img,
                   videos : downloadURL
                 })
                 .then((success) => {
@@ -79,9 +80,6 @@ const UploadForm = ({ getAllMedias, setIsLoading }) => {
                   console.log(error);
                   alert("Error happened  1 !");
                 });
-
-                
-
         });
       }
     );
@@ -155,6 +153,12 @@ const UploadForm = ({ getAllMedias, setIsLoading }) => {
             id="speaker"
             aria-describedby="emailHelp"
           />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="name" className="form-label">
+            Thumbnail
+          </label>
+          <FileBase type="file" multiple={false} onDone={({ base64 }) => setImg({selectedFile: base64 })} />
         </div>
 
         <div className="mb-3">
