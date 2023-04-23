@@ -13,7 +13,7 @@ export const Cards = (props) => {
     let text = delMedia[0].videos
     let result = parseInt(text.lastIndexOf('o/')+2);
     let result1 ;
-    if(parseInt(text.lastIndexOf('.mp4')) == -1)
+    if(parseInt(text.lastIndexOf('.mp4')) === -1)
       result1=parseInt(text.lastIndexOf('.mp3')+4);
     else
       result1=parseInt(text.lastIndexOf('.mp4')+4);
