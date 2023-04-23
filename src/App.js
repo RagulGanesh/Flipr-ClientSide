@@ -5,6 +5,7 @@ import { Login } from "./components/Login";
 import { Signup } from "./components/Signup";
 import { Admin } from "./components/Admin";
 import { Spinner } from "./components/Spinner";
+import { Profile } from "./components/Profile";
 import './static/index.css'
 import MediaPayload from "./components/MediaPayload";
 
@@ -20,6 +21,7 @@ function App() {
           <Route exact path="/admin" element={<Admin/>}/>
           <Route exact path="/spinner" element={<Spinner/>}/>
           <Route exact path="/media/:id" element={<MediaPayload/>}/> 
+          <Route exact path="/profile" element={<Profile/>}/>
         </Routes>
     </Router>
     

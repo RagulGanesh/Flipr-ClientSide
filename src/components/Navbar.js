@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {useNavigate} from 'react-router-dom';
-  
+
 
 export const Navbar = () => {
   let navigate = useNavigate();
@@ -42,7 +42,11 @@ export const Navbar = () => {
               <Link to="/signup" className="btn btn-primary" type="submit">
                 Sign up
               </Link>
-            </form> : <button className="btn btn-primary" onClick={handleLogout}>Log out</button>}
+            </form> : 
+            <div>
+              <Link to="/profile">Profile</Link>
+              <button className="btn btn-primary" onClick={handleLogout}>Log out</button>
+            </div>}
           </div>
         </div>
       </nav>
