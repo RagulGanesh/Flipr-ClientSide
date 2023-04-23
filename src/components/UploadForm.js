@@ -68,7 +68,6 @@ const UploadForm = ({ getAllMedias, setIsLoading }) => {
                   description,
                   category,
                   speaker,
-                  thumbnail : img,
                   videos : downloadURL
                 })
                 .then((success) => {

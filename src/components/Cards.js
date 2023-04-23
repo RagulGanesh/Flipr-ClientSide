@@ -2,10 +2,14 @@ import React from "react";
 import "../static/index.css"
 import { BACKEND_URI } from "../config/constants";
 import { ref, deleteObject } from "firebase/storage";
-
 import { storage } from "../firebase"
+import { useNavigate } from "react-router-dom";
 export const Cards = (props) => {
-  
+  const navigate = useNavigate();
+  const handleClick=(e)=>{
+      e.preventDefault();
+      navigate(`/media/${props.media._id}`)
+  }
   const handleDelete=async(id)=>{
     let newMedia = props.medias.filter((med) => { return med._id !== id })
     let delMedia=props.medias.filter((med)=>{return med._id === id})
@@ -41,7 +45,7 @@ export const Cards = (props) => {
     });
   }
   return (
-    <div className="col-md-4">
+    <div style={{cursor:"pointer"}} onClick={handleClick} className="col-md-4">
       <div className="card my-2">
         <div className="card-body">
           <h5 className="card-title">{props.media.name}</h5>
