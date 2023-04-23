@@ -43,7 +43,7 @@ export const Home = () => {
 
   useEffect(()=>{
     handleClick();
-  },[medias]);
+  },[query]);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -52,6 +52,19 @@ export const Home = () => {
       navigate("/signup");
     }
   }, []);
+
+  const handleCategory=(category)=>{
+    axios
+      .get(`${BACKEND_URI}/api/v1/media/${category}`)
+      .then((result) => {
+        setMedias(result.data);
+      })
+      .catch((error) => {
+        setMedias([]);
+        console.log(error);
+        alert("Error happened category !");
+      });
+  }
   return (
     <div>
       <div class="search">
@@ -60,7 +73,16 @@ export const Home = () => {
           <button onClick={handleClick} class="search-btn" type="submit"></button>
         </form>
       </div>
+      
+      <div className="container">
+        <button onClick={()=>{handleCategory("Education")}}>Education</button>
+        <button onClick={()=>{handleCategory("Business")}}>Business</button>
+        <button onClick={()=>{handleCategory("Technology")}}>Technology</button>
+        <button onClick={()=>{handleCategory("Society & Culture")}}>Society and Culture</button>
+        <button onClick={()=>{handleCategory("Comedy")}}>Comedy</button>
+      </div>
       <UploadList medias={medias}/>
+      
     </div>
   );
 };
