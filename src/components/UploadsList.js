@@ -13,4 +13,4 @@ const UploadList = ({medias, isAdmin, setMedias}) => {
   )
 }
 
-export default UploadList;
+export default UploadList;

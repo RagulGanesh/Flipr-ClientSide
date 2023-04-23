@@ -4,7 +4,7 @@ import "../static/spinner.css"
 export const Spinner = () => {
   return (
     <div className='middle'>
-        <div class="lds-facebook"><div></div><div></div><div></div></div>
+        <div className="lds-facebook"><div></div><div></div><div></div></div>
     </div>
   )
 }

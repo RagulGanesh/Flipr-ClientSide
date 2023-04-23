@@ -11,6 +11,7 @@ export const Admin = () => {
   const [medias, setMedias] = useState([]);
   const [isLoading, setIsLoading] = useState(false)
   const [isAdmin, setIsAdmin]=useState(false)
+  const [isForm, setIsForm]=useState(false)
 
   const checkAdmin = async () => {
     
@@ -50,7 +51,7 @@ export const Admin = () => {
   return (
     <>    
     {isLoading && <Spinner/>}
-    {!isLoading && <> <UploadForm getAllMedias={checkAdmin} setIsLoading={setIsLoading}/> <UploadsList isAdmin={isAdmin} medias={medias} setMedias={setMedias}/></>}
+    {!isLoading && <> {!isForm &&  <><button className="btn btn-primary" onClick={()=>{setIsForm(true)}}>Upload</button><UploadsList isAdmin={isAdmin} medias={medias} setMedias={setMedias}/></> } {isForm && <UploadForm getAllMedias={checkAdmin} setIsForm={setIsForm} setIsLoading={setIsLoading}/>}</>}
     </>
   );
 };

@@ -2,21 +2,9 @@ import React, { useState } from "react";
 import { BACKEND_URI } from "../config/constants";
 import { storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import axios from "axios";
 
-
-const UploadForm = ({ getAllMedias, setIsLoading }) => {
-  function convertToBase64(file){
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-      fileReader.onload = () => {
-        resolve(fileReader.result)
-      };
-      fileReader.onerror = (error) => {
-        reject(error)
-      }
-    })
-  }
+const UploadForm = ({ getAllMedias, setIsLoading, setIsForm }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
@@ -24,22 +12,33 @@ const UploadForm = ({ getAllMedias, setIsLoading }) => {
   const [videos, setVideos] = useState(null);
   const [img, setImg] = useState(null);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const options = [
+    { label: "Society & Culture", value: "Society & Culture" },
 
-    setIsLoading(true);
+    { label: "Education", value: "Education" },
 
-    let x = new Date().getTime() + videos.name;
-    console.log(x);
-    // setFileName(x)
+    { label: "Business", value: "Business" },
+
+    { label: "Comedy", value: "Comedy" },
+
+    { label: "Technology", value: "Technology" },
+  ];
+  const [value, setValue] = React.useState("Society & Culture");
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+
+  let imgstr = "";
+
+  const handleThumbnail = (img, videos) => {
+    let x = new Date().getTime() + img.name;
+
     const storageRef = ref(storage, x);
-    const uploadTask = uploadBytesResumable(storageRef, videos);
+    const uploadTask = uploadBytesResumable(storageRef, img);
 
-    // Listen for state changes, errors, and completion of the upload.
     uploadTask.on(
       "state_changed",
       (snapshot) => {
-        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log("Upload is " + progress + "% done");
@@ -51,91 +50,109 @@ const UploadForm = ({ getAllMedias, setIsLoading }) => {
             console.log("Upload is running");
             break;
           default:
-            console.log("default")
+            console.log("default");
         }
       },
       (error) => {
-        // A full list of error codes is available at
-        // https://firebase.google.com/docs/storage/web/handle-errors
         switch (error.code) {
           case "storage/unauthorized":
-            // User doesn't have permission to access the object
             break;
           case "storage/canceled":
-            // User canceled the upload
             break;
-
-          // ...
 
           case "storage/unknown":
-            // Unknown error occurred, inspect error.serverResponse
             break;
           default:
-              console.log("default")
+            console.log("default");
         }
       },
       () => {
-        // Upload completed successfully, now we can get the download URL
-        getDownloadURL(uploadTask.snapshot.ref).then(async(downloadURL) => {
-
-          
-          // console.log("File available at", downloadURL);
-
-          // axios
-          //   .post(`${BACKEND_URI}/api/v1/media/create`, {
-          //     name,
-          //     description,
-          //     category,
-          //     speaker,
-          //     thumbnail: img,
-          //     videos: downloadURL,
-          //   })
-          //   .then((success) => {
-          //     getAllMedias();
-          //     setIsLoading(false);
-          //     // alert("Submitted successfully");
-          //   })
-          //   .catch((error) => {
-          //     console.log(error);
-          //     alert("Error happened  1 !");
-          //   });
-
-            const thumbnail = await convertToBase64(img);
-            const response = fetch(`${BACKEND_URI}/api/v1/media/create`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({name,description,category,speaker,thumbnail,videos:downloadURL})
-            }).then((success)=>{
-              // console.log(fs.readFileSync(img).toString("base64"))
-              console.log(img)
-              
+        getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+          axios
+            .put(`${BACKEND_URI}/api/v1/media/add`, {
+              thumbnail: downloadURL,
+              videos,
+            })
+            .then((success) => {
               getAllMedias();
               setIsLoading(false);
-            }).catch((err)=>{
-              alert("Error happened  1 !");
+              setIsForm(false);
             })
-
+            .catch((error) => {
+              console.log(error);
+              alert("Error videos !");
+            });
         });
       }
     );
+  };
 
-    // let formdata = new FormData();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    // formdata.append("videos", videos);
-    // formdata.append("name", name);
+    console.log(imgstr);
 
-    // axios
-    //   .post(`${BACKEND_URI}/api/v1/media/create`, formdata)
-    //   .then((success) => {
-    //     getAllMedias();
-    //     alert("Submitted successfully");
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     alert("Error happened!");
-    //   });
+    setIsLoading(true);
+
+    let x = new Date().getTime() + videos.name;
+    console.log(x);
+    const storageRef = ref(storage, x);
+    const uploadTask = uploadBytesResumable(storageRef, videos);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log("Upload is " + progress + "% done");
+        switch (snapshot.state) {
+          case "paused":
+            console.log("Upload is paused");
+            break;
+          case "running":
+            console.log("Upload is running");
+            break;
+          default:
+            console.log("default");
+        }
+      },
+      (error) => {
+        switch (error.code) {
+          case "storage/unauthorized":
+            break;
+          case "storage/canceled":
+            break;
+          case "storage/unknown":
+            break;
+          default:
+            console.log("default");
+        }
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+          axios
+            .post(`${BACKEND_URI}/api/v1/media/create`, {
+              name,
+              description,
+              category : value,
+              speaker,
+              thumbnail: imgstr,
+              videos: downloadURL,
+            })
+            .then((success) => {
+              getAllMedias();
+              setIsLoading(false);
+              setIsForm(false);
+              // alert("Submitted successfully");
+            })
+            .catch((error) => {
+              console.log(error);
+              alert("Error happened  1 !");
+            });
+          handleThumbnail(img, downloadURL);
+        });
+      }
+    );
   };
 
   return (
@@ -169,7 +186,20 @@ const UploadForm = ({ getAllMedias, setIsLoading }) => {
           ></textarea>
         </div>
 
-        <div className="mb-3">
+        <div>
+          <div className="mb-3">
+            <label htmlFor="name" className="form-label">
+              Category &nbsp;
+              <select value={value} onChange={handleChange}>
+                {options.map((option) => (
+                  <option value={option.value}>{option.label}</option>
+                ))}
+              </select>
+            </label>
+          </div>
+        </div>
+
+        {/* <div className="mb-3">
           <label htmlFor="name" className="form-label">
             Category
           </label>
@@ -181,7 +211,7 @@ const UploadForm = ({ getAllMedias, setIsLoading }) => {
             id="category"
             aria-describedby="emailHelp"
           />
-        </div>
+        </div> */}
 
         <div className="mb-3">
           <label htmlFor="name" className="form-label">
@@ -201,7 +231,10 @@ const UploadForm = ({ getAllMedias, setIsLoading }) => {
             Thumbnail
           </label>
           <input
-            type="file" name="thumbnail" className="form-control" id="thumbnail"
+            type="file"
+            name="thumbnail"
+            className="form-control"
+            id="thumbnail"
             onChange={(e) => {
               setImg(e.target.files[0]);
             }}
