@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&family=Oswald:wght@300;400&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.upload-cont{
+    background-color: rgb(11, 10, 10);
+}
+
+.up-cont{
+    display: flex;
+    padding: 2rem;
+    justify-content: center;
+    /* background-color: aqua; */
+}
+
+.up-cont button{
+    width: 20%;
+    color: black;
+    background-color: white;
+    border: none;
+    font-weight: bolder;
+}
+
+.up-cont button:hover{
+    color: rgb(255, 255, 255);
+    background-color: rgb(56, 56, 56);
+}

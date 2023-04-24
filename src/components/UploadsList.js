@@ -7,7 +7,12 @@ import "../static/UploadList.css"
 const UploadList = ({ medias, isAdmin, setMedias }) => {
   return (
     <>
-      <div className='podcats'>Best Episodes of the Week</div>
+      {!isAdmin && 
+        <div className='podcats'>Best Episodes of the Week</div>
+      }
+      {isAdmin &&
+        <div className='podcats'>Uploaded Videos</div>
+      }
       <div className="list-cont">
         <div className="row my-2">
           {medias && medias.map((media) => {

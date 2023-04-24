@@ -5,6 +5,9 @@ import UploadForm from "./UploadForm";
 import UploadsList from "./UploadsList";
 import  {BACKEND_URI} from "../config/constants";
 import { Spinner } from "./Spinner";
+import "../static/Admin.css"
+import "../static/index.css"
+
 
 export const Admin = () => {
   const navigate = useNavigate();
@@ -51,7 +54,23 @@ export const Admin = () => {
   return (
     <>    
     {isLoading && <Spinner/>}
-    {!isLoading && <> {!isForm &&  <><button className="btn btn-primary" onClick={()=>{setIsForm(true)}}>Upload</button><UploadsList isAdmin={isAdmin} medias={medias} setMedias={setMedias}/></> } {isForm && <UploadForm getAllMedias={checkAdmin} setIsForm={setIsForm} setIsLoading={setIsLoading}/>}</>}
+    {!isLoading && 
+      <> 
+        {!isForm &&  
+          <div className="upload-cont">
+            <div class="up-cont">
+              <button className="btn btn-primary" onClick={()=>{setIsForm(true)}}>
+                + Upload new video
+              </button>
+            </div>
+            <UploadsList isAdmin={isAdmin} medias={medias} setMedias={setMedias}/>
+          </div> 
+        } 
+        {isForm && 
+          <UploadForm getAllMedias={checkAdmin} setIsForm={setIsForm} setIsLoading={setIsLoading}/>
+        }
+      </>
+    }
     </>
   );
 };

@@ -59,8 +59,12 @@ export const Cards = (props) => {
           <div className="flex-row gap-5">
             <div>
               <h5 className="card-text cd-spk">{props.media.speaker}</h5>
-              <div>
-                {props.isAdmin && <i className="fa-solid fa-trash mx-2" onClick={() => { handleDelete(props.media._id) }}></i>}
+              <div className="del">
+                {props.isAdmin && 
+                <div>
+                    <i className="fa-solid fa-trash mx-2" onClick={() => { handleDelete(props.media._id) }}></i>
+                </div>
+                }
               </div>
             </div>
           </div>
