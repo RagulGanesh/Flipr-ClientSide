@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import {useNavigate} from 'react-router-dom';
+import "../static/Signup.css"
+import mic from "../static/images/podcast-mic-1920.png"
 
 export const Signup = () => {
     const [username, setName] = useState('')
@@ -27,7 +29,10 @@ export const Signup = () => {
         console.log(json);        
     }
   return (
-    <div className="container">
+    <>
+    <img className="mic-bg" src={mic} alt=""/>
+    <div className="log-cont">
+        <div class="login-text">SignUp</div>
         <form>
         <div className="mb-3">
             <label htmlFor="exampleInputEmail1" className="form-label">Name</label>
@@ -41,8 +46,9 @@ export const Signup = () => {
             <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
             <input type="password" id="password" name="password" className="form-control" value={password} onChange={e=>{setPassword(e.target.value)}}/>
         </div>
-        <button type="submit" className="btn btn-primary" onClick={handleClick}>Submit</button>
+        <button type="submit" className="btn btn-dark w-100 my-4" onClick={handleClick}>Create an account</button>
         </form>
     </div>
+    </>
   )
 }

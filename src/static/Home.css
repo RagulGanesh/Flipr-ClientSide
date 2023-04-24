@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&family=Oswald:wght@300;400&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+.row-1{
+    height: 70vh;
+    display: flex;
+    color: white;
+    width: 100vw;
+    background-color: rgb(39, 45, 43);
+    font-size: 6rem;
+    font-weight:900;
+    /* letter-spacing: 2px; */
+}
+
+.text-cont{
+    display: flex;
+    flex-direction: column;
+    width: 60vw;
+    height: 100%;
+    padding: 6rem 0 0 7rem;
+    /* background-color: aqua; */
+}
+
+.pickup{
+    font-size: 1.25rem;
+    text-decoration: underline;
+}
+
+.girl{
+    width: 100%;
+    height: 100%;
+}
+
+.search input{
+    /* border: 1px solid black; */
+    border-left: none;
+    color: black;
+    background-color: white;
+}
+
+.search-cont{
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+    /* background-color: rgb(240, 73, 73); */
+}
+
+.search-ip{
+    width: 50vw;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+    clip-path: inset(-5px -15px -15px 0);
+    font-weight: bolder;
+    border-radius: 0 9px 9px 0;
+}
+
+.search-ip:focus{
+    color: rgb(98, 98, 98);
+    font-weight: bolder;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+    clip-path: inset(-5px -15px -15px 0);
+}
+/* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+
+.search-btn{
+    background-color: #f9fdff;
+    color: rgb(0, 0, 0);
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+    clip-path: inset(-15px 0 -15px -15px);
+    border-radius: 9px 0 0 9px;
+    border-right: none;
+    padding: 7px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.search-btn i{
+    margin-left: 5px;
+}
+
+
+
+.cat-cont{
+    background-color: rgb(21, 23, 23);
+    padding: 2rem 3rem 3rem 7rem;
+    font-weight: bolder;
+    color: white;
+}
+
+.cat-head{
+    font-size: 2rem;
+    font-weight: bolder;
+    color: white;
+    margin-bottom: 2rem;
+    background-color: #131516;
+}
+
+.cat-cards{
+    display: flex;
+}
+
+.cat-card{
+    border: 1px solid white;
+    border-radius: 9px;
+    margin: 1rem;
+    height: 40vh;
+    padding: 1rem 2rem;
+}
+
+
+
+
+
+@media only screen and (max-width: 600px){
+    .row-1{
+        height: 50vh;
+        font-size: 2.5rem;
+        font-weight:900;
+        /* letter-spacing: 2px; */
+    }
+    
+    .text-cont{
+        display: flex;
+        flex-direction: column;
+        width: 60vw;
+        height: 100%;
+        padding: 6rem 0 0 20px;
+        /* background-color: aqua; */
+    }
+    
+    .pickup{
+        font-size: 15px;
+        text-decoration: underline;
+    }
+    
+    .girl{
+        width: 100%;
+        height: 100%;
+    }
+
+    .cat-cont{
+        padding: 2rem 3rem 3rem 20px;
+    }
+    .cat-card{
+        margin: 1rem 3rem;
+        height: 10vh;
+        padding: 1rem 2rem;
+    }
+
+    .ed{
+        
+    }
+} 

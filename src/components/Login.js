@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import "../static/Login.css"
+import mic from "../static/images/podcast-mic-1920.png"
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,7 +39,10 @@ export const Login = () => {
     console.log(json);
   };
   return (
-    <div className="container my-4">
+    <>
+    <img className="mic-bg" src={mic} alt=""/>
+    <div className="log-cont">
+      <div class="login-text">Login</div>
       <form>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
@@ -54,7 +58,7 @@ export const Login = () => {
             onChange={(e) => {
               setEmail(e.target.value);
             }}
-          />
+            />
         </div>
         <div className="mb-3">
           <label htmlFor="exampleInputPassword1" className="form-label">
@@ -71,10 +75,11 @@ export const Login = () => {
             }}
           />
         </div>
-        <button type="submit" className="btn btn-primary" onClick={handleClick}>
-          Submit
+        <button type="submit" className="btn btn-dark w-100 my-4" onClick={handleClick}>
+          Log In
         </button>
       </form>
     </div>
+    </>
   );
 };
