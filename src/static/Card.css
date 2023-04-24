@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&family=Oswald:wght@300;400&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.cd{
+    cursor: pointer;
+    background-color: rgb(31, 31, 31);
+    height: 55vh;
+}
+
+.cd:hover{
+    background-color: rgb(53, 53, 53);
+}
+
+.cd-bd{
+    padding: 1.5rem 1.5rem;
+}
+
+.img-pod{
+    height: 170px;
+    width: 100%;
+    border-radius: 9px;
+    margin-bottom: 1rem;
+}
+
+.cd-ttl{
+    font-size: 20px;
+    font-weight: bolder;
+    color: white;
+}
+
+.cd-spk{
+    margin-top: 10px;
+    font-size: 14px;
+    color: rgb(171, 171, 171);
+}
